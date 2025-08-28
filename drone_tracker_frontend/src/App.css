@@ -1,0 +1,312 @@
+/* App Container */
+.app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #000;
+  display: flex;
+}
+
+/* Map Container */
+.map-container {
+  width: calc(100% - 320px);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 320px;
+  z-index: 1;
+}
+
+.simple-map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Mapbox Container */
+.mapboxgl-map {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Custom Mapbox Controls */
+.mapboxgl-ctrl-top-right {
+  top: 80px;
+  right: 20px;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  bottom: 100px;
+  right: 20px;
+}
+
+/* Mapbox Popup Styling */
+.mapboxgl-popup {
+  max-width: 300px;
+}
+
+.mapboxgl-popup-content {
+  background: rgba(20, 20, 20, 0.95) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 15px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+}
+
+.mapboxgl-popup-close-button {
+  color: white !important;
+  font-size: 18px !important;
+  padding: 5px !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: rgba(20, 20, 20, 0.95) !important;
+  border-bottom-color: rgba(20, 20, 20, 0.95) !important;
+}
+
+/* Popup Content */
+.drone-popup {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.drone-popup h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drone-popup .status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.drone-popup .status-indicator.green {
+  background: #28a745;
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.5);
+}
+
+.drone-popup .status-indicator.red {
+  background: #dc3545;
+  box-shadow: 0 0 6px rgba(220, 53, 69, 0.5);
+}
+
+.drone-popup .info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.drone-popup .info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.drone-popup .info-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+.drone-popup .info-value {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Loading States */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  margin-left: 10px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error States */
+.error {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 10000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mapboxgl-ctrl-top-right {
+    top: 70px;
+    right: 15px;
+  }
+  
+  .mapboxgl-ctrl-bottom-right {
+    bottom: 80px;
+    right: 15px;
+  }
+  
+  .drone-popup .info-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mapboxgl-popup {
+    max-width: 250px;
+  }
+  
+  .mapboxgl-popup-content {
+    padding: 12px !important;
+  }
+  
+  .drone-popup h3 {
+    font-size: 1rem;
+  }
+  
+  .drone-popup .info-grid {
+    font-size: 0.8rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mapboxgl-popup-content {
+    background: #000 !important;
+    border: 2px solid #fff !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .loading::after {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .app {
+    height: auto;
+    overflow: visible;
+  }
+  
+  .drone-list-sidebar,
+  .red-drone-counter,
+  .drone-list-toggle {
+    display: none;
+  }
+}
+
+/* Pulse animation for active drones */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced map container styles */
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #1a1a1a;
+}
+
+.map-container * {
+  box-sizing: border-box;
+}
+
+/* Connection status pulse animation */
+@keyframes connectionPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .map-container {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    height: 100vh;
+  }
+}

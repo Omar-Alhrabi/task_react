@@ -1,0 +1,197 @@
+/* Red Drone Counter */
+.red-drone-counter {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.9), rgba(220, 53, 69, 0.7));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 140px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.red-drone-counter:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(220, 53, 69, 0.4);
+  background: linear-gradient(135deg, rgba(220, 53, 69, 1), rgba(220, 53, 69, 0.8));
+}
+
+/* Counter Icon */
+.counter-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  flex-shrink: 0;
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Counter Content */
+.counter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.counter-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.counter-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Pulse Animation Background */
+.counter-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(220, 53, 69, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .red-drone-counter {
+    bottom: 15px;
+    right: 15px;
+    padding: 12px 16px;
+    min-width: 120px;
+  }
+  
+  .counter-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .counter-number {
+    font-size: 1.3rem;
+  }
+  
+  .counter-label {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .red-drone-counter {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 14px;
+    min-width: 100px;
+    gap: 8px;
+  }
+  
+  .counter-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .counter-number {
+    font-size: 1.2rem;
+  }
+  
+  .counter-label {
+    font-size: 0.65rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .red-drone-counter {
+    background: #dc3545;
+    border: 2px solid #fff;
+  }
+  
+  .counter-icon {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .red-drone-counter,
+  .counter-icon,
+  .counter-pulse {
+    animation: none;
+  }
+  
+  .red-drone-counter:hover {
+    transform: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .red-drone-counter {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.95), rgba(220, 53, 69, 0.8));
+    box-shadow: 0 8px 32px rgba(220, 53, 69, 0.4);
+  }
+}
+
+/* Warning state for high numbers */
+.red-drone-counter[data-count="high"] {
+  animation: warningBlink 1s infinite alternate;
+}
+
+@keyframes warningBlink {
+  0% {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.9), rgba(220, 53, 69, 0.7));
+  }
+  100% {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.9), rgba(255, 69, 0, 0.7));
+  }
+}
